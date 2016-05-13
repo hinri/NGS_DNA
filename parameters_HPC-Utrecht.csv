@@ -1,0 +1,4 @@
+queue,all.q
+tmpName,\$TMPDIR
+prmName,hpcsubmit
+root,/hpc/local/$MY_DIST/MY_GROUP/software

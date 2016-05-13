@@ -9,10 +9,10 @@ ENVIRONMENT_PARAMETERS=""
 TMPDIR=""
 GROUP=""
 
-if [[ "${HOST}" == "zinc-finger.gcc.rug.nl" ]]
+if [[ "${HOST}" == "osboxes" ]]
 then
-    	ENVIRONMENT_PARAMETERS="parameters_zinc-finger.csv"
-        TMPDIR="tmp05"
+    	ENVIRONMENT_PARAMETERS="parameters_HPC-Utrecht.csv"
+        TMPDIR="\$TMPDIR"
 elif [ "${HOST}" == "leucine-zipper.gcc.rug.nl" ]
 then
     	ENVIRONMENT_PARAMETERS="parameters_leucine-zipper.csv"
@@ -22,18 +22,18 @@ then
     	ENVIRONMENT_PARAMETERS="parameters_calculon.csv"
         TMPDIR="tmp04"
 else
-    	echo "unknown host: running is only possible on calculon,zinc-finger or leucine-zipper"
+    	echo "unknown host: running is only possible on calculon,HPC-Utrecht or leucine-zipper"
 fi
 
 THISDIR=$(pwd)
-if [[ $THISDIR == *"/groups/umcg-gaf/"* ]]
+if [[ $THISDIR == *"/hpc/dbg_gen/"* ]]
 then
-	GROUP="umcg-gaf" 
+	GROUP="dbg_gen" 
 elif [[ $THISDIR == *"/groups/umcg-gd/"* ]] 
 then
 	GROUP="umcg-gd"
 else
-	echo "this is not a known group, please run only in umcg-gd or umcg-gaf group"
+	echo "this is not a known group, please run only in dbg_gen or umcg-gaf group"
 fi
 
 printf "${ENVIRONMENT_PARAMETERS}\t${TMPDIR}\t${GROUP}" > ./environment_checks.txt

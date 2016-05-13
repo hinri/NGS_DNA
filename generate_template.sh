@@ -4,20 +4,21 @@ module load NGS_DNA/3.2.2-Molgenis-Compute-v16.04.1-Java-1.8.0_45
 module list 
 HOST=$(hostname)
 ##Running script for checking the environment variables
-sh ${EBROOTNGS_DNA}/checkEnvironment.sh ${HOST}
+${EBROOTNGS_DNA}/checkEnvironment.sh ${HOST}
 
 ENVIRONMENT_PARAMETERS=$(awk '{print $1}' ./environment_checks.txt)
 TMPDIR=$(awk '{print $2}' ./environment_checks.txt)
 GROUP=$(awk '{print $3}' ./environment_checks.txt)
 
 PROJECT=projectXX
-WORKDIR="/groups/${GROUP}/${TMPDIR}"
+WORKDIR="$HOME/hpc/dbg_gen/molgenis"
 RUNID=runXX
 ## For small batchsize (6) leave BATCH empty, _exome (10 batches), _wgs (20 batches) or _chr (per chrosomome), OR but this is beta _NO (1 batch),
 BATCH=""
 THISDIR=$(pwd)
 
-SAMPLESIZE=$(( $(sh ${EBROOTNGS_DNA}/samplesize.sh ${WORKDIR}/generatedscripts/${PROJECT}/${PROJECT}.csv $THISDIR) -1 ))
+SAMPLESIZE=$(( $(${EBROOTNGS_DNA}/samplesize.sh ${WORKDIR}/generatedscripts/${PROJECT}/${PROJECT}.csv $THISDIR) -1 ))
+echo "${EBROOTNGS_DNA}/samplesize.sh ${WORKDIR}/generatedscripts/${PROJECT}/${PROJECT}.csv $THISDIR -1"
 echo "Samplesize is $SAMPLESIZE"
 if [ $SAMPLESIZE -gt 199 ]
 then
@@ -45,7 +46,7 @@ ${WORKDIR}/generatedscripts/${PROJECT}/group_parameters.csv
 perl ${EBROOTNGS_DNA}/convertParametersGitToMolgenis.pl ${EBROOTNGS_DNA}/${ENVIRONMENT_PARAMETERS} > \
 ${WORKDIR}/generatedscripts/${PROJECT}/environment_parameters.csv
 
-sh $EBROOTMOLGENISMINCOMPUTE/molgenis_compute.sh \
+$EBROOTMOLGENISMINCOMPUTE/molgenis_compute.sh \
 -p ${WORKDIR}/generatedscripts/${PROJECT}/out.csv \
 -p ${WORKDIR}/generatedscripts/${PROJECT}/environment_parameters.csv \
 -p ${WORKDIR}/generatedscripts/${PROJECT}/group_parameters.csv \
