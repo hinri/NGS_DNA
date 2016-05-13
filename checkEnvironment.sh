@@ -8,7 +8,8 @@ fi
 ENVIRONMENT_PARAMETERS=""
 TMPDIR=""
 GROUP=""
-if [ "${HOST}" == "zinc-finger.gcc.rug.nl" ]
+
+if [[ "${HOST}" == "zinc-finger.gcc.rug.nl" ]]
 then
     	ENVIRONMENT_PARAMETERS="parameters_zinc-finger.csv"
         TMPDIR="tmp05"

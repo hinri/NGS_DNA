@@ -120,7 +120,7 @@ fi
 echo "before run second rocket"
 echo pwd
 
-sh ${EBROOTMOLGENISMINCOMPUTE}/molgenis_compute.sh -p ${mainParameters} \
+${EBROOTMOLGENISMINCOMPUTE}/molgenis_compute.sh -p ${mainParameters} \
 -p ${environment_parameters} \
 -p ${batchIDList} \
 -p ${projectJobsDir}/${project}.csv \
